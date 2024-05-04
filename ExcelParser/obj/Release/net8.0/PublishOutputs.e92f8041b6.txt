@@ -1,0 +1,8 @@
+/Users/jeong-yunjae/Desktop/Projects/ExcelParser/bin/Release/net8.0/publish/ExcelParser
+/Users/jeong-yunjae/Desktop/Projects/ExcelParser/bin/Release/net8.0/publish/ExcelParser.dll
+/Users/jeong-yunjae/Desktop/Projects/ExcelParser/bin/Release/net8.0/publish/ExcelParser.deps.json
+/Users/jeong-yunjae/Desktop/Projects/ExcelParser/bin/Release/net8.0/publish/ExcelParser.runtimeconfig.json
+/Users/jeong-yunjae/Desktop/Projects/ExcelParser/bin/Release/net8.0/publish/ExcelParser.pdb
+/Users/jeong-yunjae/Desktop/Projects/ExcelParser/bin/Release/net8.0/publish/ExcelDataReader.dll
+/Users/jeong-yunjae/Desktop/Projects/ExcelParser/bin/Release/net8.0/publish/ExcelDataReader.DataSet.dll
+/Users/jeong-yunjae/Desktop/Projects/ExcelParser/bin/Release/net8.0/publish/Newtonsoft.Json.dll

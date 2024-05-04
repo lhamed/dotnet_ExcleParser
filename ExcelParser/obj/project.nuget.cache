@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "J84jN2H9oCNzp+kyED9vms2REtfehJAXvAOFBqjuu6OhxOyyepp36Z+zzv8+cFjIwGJSgjhBTz0NcyVIoc8wjg==",
+  "dgSpecHash": "8AMYv571TeZsjUYgEogOHySqQX9zS5PnCl/Qj60nqbd6iUNt3OQ0cdJtbhXEeHm51j2fD8liCUYCxU6YUbmxCg==",
   "success": true,
-  "projectFilePath": "/Users/jeong-yunjae/Desktop/Projects/ExcelParser/ExcelParser.csproj",
+  "projectFilePath": "/Users/jeong-yunjae/Desktop/Projects/dotnet_ExcleParser/ExcelParser/ExcelParser.csproj",
   "expectedPackageFiles": [
     "/Users/jeong-yunjae/.nuget/packages/exceldatareader/3.7.0-develop00385/exceldatareader.3.7.0-develop00385.nupkg.sha512",
     "/Users/jeong-yunjae/.nuget/packages/exceldatareader.dataset/3.6.0/exceldatareader.dataset.3.6.0.nupkg.sha512",

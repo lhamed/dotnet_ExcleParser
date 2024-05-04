@@ -198,11 +198,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/jeong-yunjae/Desktop/Projects/ExcelParser/ExcelParser.csproj",
+      "projectUniqueName": "/Users/jeong-yunjae/Desktop/Projects/dotnet_ExcleParser/ExcelParser/ExcelParser.csproj",
       "projectName": "ExcelParser",
-      "projectPath": "/Users/jeong-yunjae/Desktop/Projects/ExcelParser/ExcelParser.csproj",
+      "projectPath": "/Users/jeong-yunjae/Desktop/Projects/dotnet_ExcleParser/ExcelParser/ExcelParser.csproj",
       "packagesPath": "/Users/jeong-yunjae/.nuget/packages/",
-      "outputPath": "/Users/jeong-yunjae/Desktop/Projects/ExcelParser/obj/",
+      "outputPath": "/Users/jeong-yunjae/Desktop/Projects/dotnet_ExcleParser/ExcelParser/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/jeong-yunjae/.nuget/NuGet/NuGet.Config"

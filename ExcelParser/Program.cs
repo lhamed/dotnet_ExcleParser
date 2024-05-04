@@ -66,7 +66,7 @@ class Program
             string typeName = dataTable.Rows[0][i].ToString();
             string propertyName = dataTable.Rows[1][i].ToString();
 
-            classCode += $"    public {typeName} {propertyName} {{ get; set; }}\n";
+            classCode += $"    public {typeName} {propertyName} ;\n";
         }
 
         classCode += "}\n";

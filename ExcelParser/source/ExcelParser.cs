@@ -4,15 +4,24 @@ using System.Data;
 
 public class ExcelParser
 {
-    ConverterManager converterManager;
-    public ExcelParser(ConverterManager convertManager)
+    ConvertContext converterManager;
+    public ExcelParser(ConvertContext convertManager)
     {
         this.converterManager = convertManager;
     }
 
     public void Parse(string[] pathes)
     {
+
+
         DataTable[] dataTables = ExportDataTableFromExcel(pathes);
+
+        if(dataTables==null)
+            return;
+
+        foreach(var a in dataTables)
+            Console.WriteLine(a);
+
         FileInfo[] exportedFileInfos = ConvertToFileInfoFromDataTable(dataTables);
 
         foreach (var fileInfo in exportedFileInfos)
@@ -33,6 +42,7 @@ public class ExcelParser
             DataTable[] tables = dataTableExporter.ExportFrom(path);
             foreach (var table in tables)
             {
+                Console.WriteLine("ADD table : " + table.TableName);
                 exportedTables.Add(table);
             }
         }
@@ -42,8 +52,13 @@ public class ExcelParser
     FileInfo[] ConvertToFileInfoFromDataTable(DataTable[] tables)
     {
         List<FileInfo> exportedFileInfos = new List<FileInfo>();
+
+            
         foreach (var table in tables)
         {
+            if(table==null)
+                Console.WriteLine("NULl!!");
+
             var fileInfos = converterManager.ConvertToFileInfosFrom(table);
             foreach (var fileInfo in fileInfos)
             {

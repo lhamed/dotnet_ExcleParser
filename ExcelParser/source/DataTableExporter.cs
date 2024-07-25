@@ -1,18 +1,12 @@
 using System.Data;
 using ExcelDataReader;
 
-
-
 public class DataTableExporter
 {
-    DataTable[] dataTables;
 
     public DataTable[] ExportFrom(string path)
     {
-        if (path == null)
-        {
-            throw new Exception($"Parameter {nameof(path)} is null.");
-        }
+        List<DataTable> dataTables = new List<DataTable>();
 
         using (var stream = File.Open(path, FileMode.Open, FileAccess.Read))
         {
@@ -20,9 +14,13 @@ public class DataTableExporter
             {
                 DataSet dataSet = reader.AsDataSet();
 
-                dataTables = new DataTable[dataSet.Tables.Count];
+                var d = dataSet.Tables;
+                foreach(DataTable a in d)
+                {
+                    dataTables.Add(a);
+                }
             }
         }
-        return dataTables;
+        return dataTables.ToArray();
     }
 }

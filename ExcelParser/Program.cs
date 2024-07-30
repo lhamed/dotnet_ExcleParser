@@ -14,22 +14,26 @@ class Program
 {
     static void Main()
     {
-        System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+        System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance); // 사용하는 모듈이 의존성 있음
 
-        ConvertContext convertContext = new ConvertContext
+        var extracter = new ExcelFileExtracter
         (
-            new JsonConvertStrategy(), 
+            new JsonConvertStrategy(),
             new CsharpClassConvertStrategy()
-        );
+        ); // 스탬프 결합도 
 
-        var excelParser = new ExcelParser(convertContext);
-        string[] targetPathes = Directory.GetFiles
+        string[] targetPathes = Directory.GetFiles // 외부 결합도
         (
-            STRINGS.EXCEL_FOLDER_PATH, 
+            STRINGS.EXCEL_FOLDER_PATH,
             STRINGS.XLSX_SEARCH_PATTERN
         );
 
-        excelParser.Parse(targetPathes);
+        FileInfo[] fileInfos = extracter.Extract(targetPathes); // 스탬프 결합도 
+
+        foreach (var fileInfo in fileInfos)
+        {
+            fileInfo.Write();
+        }
     }
 }
 

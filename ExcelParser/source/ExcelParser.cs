@@ -1,55 +1,61 @@
 using System.Data;
+using Microsoft.VisualBasic;
 
-public class ExcelParser
+public class ExcelFileExtracter
 {
-    ConvertContext convertContext;
-    public ExcelParser(ConvertContext convertContext)
+    ExcelFileConverter fileInfoExtracter;
+     IConvertStrategy[] convertStrategies;
+    public ExcelFileExtracter(params IConvertStrategy[] convertStrategies)
     {
-        this.convertContext = convertContext;
+        this.convertStrategies = convertStrategies;
+        this.fileInfoExtracter = new ExcelFileConverter();
     }
 
-    public void Parse(string[] pathes)
+    public FileInfo[] Extract(string[] pathes)
     {
-        DataTable[] dataTables = ExportDataTableFromExcel(pathes);
-        FileInfo[] exportedFileInfos = ConvertToFileInfoFromDataTable(dataTables);
+        List<FileInfo> result = new List<FileInfo>();
 
-        foreach (var fileInfo in exportedFileInfos)
+        foreach(var strategy in convertStrategies)
         {
-            fileInfo.Write();
+            FileInfo[] fileInfos = fileInfoExtracter.Convert(strategy, pathes);
+            result.AddRange(fileInfos);
         }
+
+        return result.ToArray();
+    }
+}
+
+public class ExcelFileConverter
+{
+    DataTableExporter dataTableExporter;
+
+    public ExcelFileConverter()
+    {
+        this.dataTableExporter = new DataTableExporter();
     }
 
-    DataTable[] ExportDataTableFromExcel(string[] pathes)
+    public FileInfo[] Convert(IConvertStrategy strategy, string[] pathes)
     {
         List<DataTable> exportedTables = new List<DataTable>();
-        var dataTableExporter = new DataTableExporter();
         foreach (var path in pathes)
         {
-            DataTable[] tables = dataTableExporter.ExportFrom(path);
+            DataTable[] tables = dataTableExporter.Export(path);
             foreach (var table in tables)
             {
                 exportedTables.Add(table);
             }
         }
-        return exportedTables.ToArray();
-    }
 
-    FileInfo[] ConvertToFileInfoFromDataTable(DataTable[] tables)
-    {
         List<FileInfo> exportedFileInfos = new List<FileInfo>();
-
-            
-        foreach (var table in tables)
+        foreach (var table in exportedTables)
         {
-            var fileInfos = convertContext.ConvertToFileInfosFrom(table);
-            foreach (var fileInfo in fileInfos)
-            {
-                exportedFileInfos.Add(fileInfo);
-            }
+            string fileContent = strategy.Convert(table);
+            string fileName = strategy.GetFileName(table);
+
+            FileInfo fileInfo = new FileInfo(fileName,fileContent);
+            exportedFileInfos.Add(fileInfo);
         }
 
         return exportedFileInfos.ToArray();
     }
-
-
 }

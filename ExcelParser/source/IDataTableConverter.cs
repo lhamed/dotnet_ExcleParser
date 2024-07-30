@@ -4,16 +4,16 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 // 전략 패턴을 이용해 확장자 별로 다른 처리를 구현했다. 
-public interface ConvertStrategy
+public interface IConvertStrategy
 {
-    public string ConvertToString(DataTable table);
+    public string Convert(DataTable table);
 
-    public string ExportFileName(DataTable table);
+    public string GetFileName(DataTable table);
 }
 
-public class CsharpClassConvertStrategy : ConvertStrategy
+public class CsharpClassConvertStrategy : IConvertStrategy
 {
-    public string ConvertToString(DataTable table)
+    public string Convert(DataTable table)
     {
 
         string classCode = $"public class {table.TableName} \n {{ ";
@@ -31,15 +31,15 @@ public class CsharpClassConvertStrategy : ConvertStrategy
         return classCode;
     }
 
-    public string ExportFileName(DataTable table)
+    public string GetFileName(DataTable table)
     {
         return table.TableName + STRINGS.CSHARP_FILE_SUFFIX;
     }
 }
 
-public class JsonConvertStrategy : ConvertStrategy
+public class JsonConvertStrategy : IConvertStrategy
 {
-    public string ConvertToString(DataTable table)
+    public string Convert(DataTable table)
     {
             
         var jsonArray = new JArray();
@@ -61,7 +61,7 @@ public class JsonConvertStrategy : ConvertStrategy
         return jsonData;
     }
 
-    public string ExportFileName(DataTable table)
+    public string GetFileName(DataTable table)
     {
         return table.TableName + STRINGS.JSON_FILE_SUFFIX;
     }

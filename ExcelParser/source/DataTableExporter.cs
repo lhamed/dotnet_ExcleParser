@@ -3,8 +3,7 @@ using ExcelDataReader;
 
 public class DataTableExporter
 {
-
-    public DataTable[] ExportFrom(string path)
+    public DataTable[] Export(string path)
     {
         List<DataTable> dataTables = new List<DataTable>();
 

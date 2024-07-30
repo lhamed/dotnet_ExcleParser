@@ -8,6 +8,6 @@ public class data_item
     public int atkMin ;
     public int defMin ;
     public int hpMin ;
-    public Date updatedAt ;
-    public Date createdAt ;
+    public DateTime updatedAt ;
+    public DateTime createdAt ;
 }

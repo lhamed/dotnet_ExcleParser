@@ -1,26 +1,23 @@
 
 using System.Data;
 
-public class ConvertContext  // 게임 개발이 진행되며, 여러 포맷을 다뤄야 할지도 모르니, 인터페이스로 선언해서 확장에 대비했습니다. 
+public class ConvertContext
 {
-    ConvertStrategy[] dataTableConverters;
-    public ConvertContext(params ConvertStrategy[] converters)
+    IConvertStrategy[] dataTableConverters;
+    public ConvertContext(params IConvertStrategy[] converters)
     {
         this.dataTableConverters = converters;
     }
 
-    public FileInfo[] ConvertToFileInfosFrom(DataTable dataTables)
+    public FileInfo[] Convert(DataTable dataTables)
     {
-        int converterCount = dataTableConverters.Length; // 2번 이상 사용할 변수는 따로 묶습니다. 
-
-        var resultStrings = new FileInfo[converterCount];
-        for (int i = 0; i < converterCount; i++)
+        var result = new List<FileInfo>();
+        foreach (var convertStrategy in dataTableConverters)
         {
-            var content = dataTableConverters[i].ConvertToString(dataTables);
-            var fileName = dataTableConverters[i].ExportFileName(dataTables);
-            resultStrings[i] = new FileInfo(fileName, content);
+            var content = convertStrategy.Convert(dataTables);
+            var fileName = convertStrategy.GetFileName(dataTables);
+            result.Add( new FileInfo(fileName, content));
         }
-
-        return resultStrings;
+        return result.ToArray();
     }
 }
